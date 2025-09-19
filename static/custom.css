@@ -1,0 +1,45 @@
+body {
+    background-color: whitesmoke;
+}
+
+.div-bem_vindo {
+    background-color:white;
+    width: 64vh;
+    margin-top: 10%;
+    margin-left: 20%;
+    border-radius: 16px;
+    padding: 50px;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif  
+}
+
+input {
+    width: auto;
+}
+
+.button-base {
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-top: 20px;
+}
+
+.button-welcome {
+    width: 100px;
+    height: 30px; 
+}
+
+.button-login {
+    width: auto;
+    height: 30px; 
+}
+
+.form-login {
+    background-color: white;
+    width: 36vh;
+    height: 30vh;
+    margin: auto;
+    padding: 1.5%;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
