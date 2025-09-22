@@ -1,6 +1,10 @@
 from flask import Flask, render_template
+from routes.user import user_bp
+from routes.auth import auth_bp
 
 app = Flask(__name__)
+
+app.secret_key = '123'
 
 users = [
     {"id":1, 
@@ -47,14 +51,11 @@ users = [
     } 
 ]
 
-@app.route("/")
-def home():
-    return render_template("home.html")
 
 @app.route("/users")
 def users_render():
     return render_template("users.html", users=users)
 
-@app.route("/login")
-def login():
-    return render_template("auth/login.html")
+
+app.register_blueprint(user_bp, url_prefix='/user')
+app.register_blueprint(auth_bp, url_prefix='/auth')

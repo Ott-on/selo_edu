@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/custom.css">
+    <!--<link rel="stylesheet" href="static/custom.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
     <title>Document</title>
 </head>
 <body>
     <div class="form-login">
-        <form action="">
+        <form action="" method="POST">
             <h1>Login</h1>
             <p>E-mail</p>
-            <input type="text">
+            <input type="text" name="email">
             <p>Senha</p>
-            <input type="text">
+            <input type="password" name="password">
             <br>
-            <button type="button" class="button-base button-login"onclick="location.href='{{ url_for('home') }}'">Entrar</button>
+            <button type="submit" class="button-base button-login">Entrar</button>
         </form>
     </div>
 </body>
