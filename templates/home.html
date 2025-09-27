@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" href="static/custom.css">-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
-    <title>seloedu</title>
-</head>
-<body>
-    <div class="div-bem_vindo">
-        <h1>Bem-vindo ao SELOEDU</h1>
-        <p>Seu gerenciador de aplicação de treinamentos.</p>
-        <p>Faça login para acessar o painel.</p>
-        <button type="button" class="button-base button-welcome">Entrar</button>   
-    </div>
-</body>
-</html>
+<!-- { extends "base.html" %} -->
+
+{% block content %}
+    <h2>Bem-vindo ao SELOEDU</h2>
+    <p>Esta é a página inicial da aplicação.</p>
+    <p><a href="{{ url_for('auth.login') }}">Entrar</a></p>
+    <p>Logado? {{ 'Sim' if current_user.is_authenticated else 'Não' }}</p>
+    <p>User atual: {{ current_user.get_id() if current_user.is_authenticated else 'Nenhum' }}</p>
+
+{%endblock%}

@@ -1,61 +1,41 @@
 from flask import Flask, render_template
-from routes.user import user_bp
-from routes.auth import auth_bp
+from extensions import db, login_manager
+from models.user import User
+from views.auth import auth_bp
+from views.users import users_bp
+
 
 app = Flask(__name__)
+app.config.from_object("config.Config")
 
-app.secret_key = '123'
-
-users = [
-    {"id":1, 
-     "nome": "Mauro Ramos", 
-     "email":"mauro@gmail.com", 
-     "perfil":"Coordenador", 
-     "status":"Ativo"
-     },
-    {"id":2, 
-     "nome": "Ana Nígeria", 
-     "email":"ana@outlook.com", 
-     "perfil":"Desenvolvedor", 
-     "status":"Ativo"
-     },
-    {"id":3, 
-     "nome": "Carlos Almeida", 
-     "email":"car2024.almeida@hotmail.com", 
-     "perfil":"Gerente de Projetos", 
-     "status":"Inativo"
-     },
-    {"id":4, 
-     "nome": "Beatriz Mato Grosso", 
-     "email":"Bea89@gmail.com", 
-     "perfil":"Analista de Dados", 
-     "status":"Ativo"
-     },
-    {"id":5, 
-     "nome": "Fernando Pessoa", 
-     "email":"fernando.souza@gmail.com", 
-     "perfil":"Designer UX/UI", 
-     "status":"Ativo"
-     },
-    {"id":6, 
-     "nome": "Juliana Beira", 
-     "email":"juju.limas@gmail.com", 
-     "perfil":"QA", 
-     "status":"Inativo"
-     },
-    {"id":7, 
-     "nome": "Joaquim Ribeiro", 
-     "email":"jojo@gmail.com", 
-     "perfil":"Suporte Técnico",
-     "status":"Ativo"
-    } 
-]
+db.init_app(app)
+login_manager.init_app(app)
 
 
-@app.route("/users")
-def users_render():
-    return render_template("users.html", users=users)
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-app.register_blueprint(user_bp, url_prefix='/user')
-app.register_blueprint(auth_bp, url_prefix='/auth')
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+with app.app_context():
+    db.create_all()
+    if not User.query.filter_by(email="admin@seloedu.com").first():
+        user = User(nome="Admin", email="admin@seloedu.com", role="master")
+        user.set_password("123456")
+        db.session.add(user)
+        db.session.commit()
+        print("Usuário admin criado com sucesso!")
+
+app.register_blueprint(auth_bp)
+app.register_blueprint(users_bp)
+
+if __name__ == "__main__":
+    app.run(debug=True)
