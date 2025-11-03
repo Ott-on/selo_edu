@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+    <title>Selo Edu</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="login-form" method="POST" action="{{ url_for('auth.login') }}">
+        <h1>Login</h1>
+        <p>Email</p>
+        <input type="email" name="email" />
+        <p>Senha</p>
+        <input type="password" name="password" /> <br />
+        <button type="submit" class="botton-login">
+          Entrar
+        </button>
+      </form>
+
+      <a href="{{ url_for('auth.forgot_password_request') }}">Esqueci a senha</a>
+    </div>
+  </body>
+</html>
