@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Turmas do Treinamento{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vincular_alunos.css') }}">
+
+<div class="header-container">
+    <h1 style="margin: 0;">Turmas do Treinamento</h1>
+    <a href="{{ url_for('treinamento.dashboard') }}" class="btn-secondary">Voltar aos Treinamentos</a>
+</div>
+
+
+<div class="info-box">
+    <strong>Treinamento:</strong> {{ treinamento.nome }}<br>
+    <strong>Descrição:</strong> {{ treinamento.descricao }}
+</div>
+
+<hr style="margin-top: 24px; margin-bottom: 24px; border: 0; border-top: 1px solid #e5e7eb;">
+
+<!-- SEÇÃO PARA CRIAR NOVA TURMA -->
+<div class="form-container" style="margin-bottom: 30px;">
+    <h2>Criar Nova Turma</h2>
+    <form method="POST" action="{{ url_for('treinamento.criar_turma', treinamento_id=treinamento.id) }}">
+        <div class="form-group">
+            <label for="nome_turma">Nome da Turma</label>
+            <input type="text" id="nome_turma" name="nome_turma" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-primary">Criar Turma</button>
+    </form>
+</div>
+
+<!-- GRID DE TURMAS EXISTENTES -->
+<h2>Turmas Existentes</h2>
+<div class="turmas-grid">
+    {% if treinamento.turmas %}
+        {% for turma in treinamento.turmas %}
+        <div class="card">
+            <h3>{{ turma.nome }}</h3>
+            <p>{{ turma.alunos|length }} aluno(s) vinculado(s)</p>
+
+            <a href="{{ url_for('treinamento.vincular_alunos', turma_id=turma.id) }}">
+                <button class="btn-primary">Gerenciar Alunos</button>
+            </a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Ainda não há turmas para este treinamento. Crie uma acima!</p>
+    {% endif %}
+</div>
+
+{% endblock %}

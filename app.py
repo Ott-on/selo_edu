@@ -1,6 +1,9 @@
 from flask import Flask, render_template
 from extensions import db, login_manager
 from models.user import User
+from models.turma import Turma
+from models.treinamento import Treinamento
+from models.profile import Profile
 from routes.auth import auth_bp
 from routes.user import users_bp
 from routes.treinamento import treinamento_bp
@@ -11,7 +14,6 @@ app.config.from_object("config.Config")
 
 db.init_app(app)
 login_manager.init_app(app)
-
 mail.init_app(app)
 
 @login_manager.user_loader
@@ -21,10 +23,6 @@ def load_user(user_id):
 @app.route("/")
 def home():
     return render_template("home.html")
-
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
 
 with app.app_context():
     db.create_all()

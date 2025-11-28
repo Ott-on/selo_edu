@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Vincular Alunos à Turma{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vincular_alunos.css') }}">
+
+<div class="page-container">
+
+    <div class="header-container">
+        <div>
+            <h1>Vincular Alunos</h1>
+            <p class="subtitle">Selecione os alunos que farão parte da turma <strong>{{ turma.nome }}</strong>.</p>
+        </div>
+        <a href="{{ url_for('treinamento.listar_turmas', treinamento_id=turma.treinamento_id) }}" class="btn-secondary">Voltar</a>
+    </div>
+
+    <div class="info-box">
+        <strong>Treinamento:</strong> {{ turma.treinamento.nome }}<br>
+        <strong>Turma:</strong> {{ turma.nome }}
+    </div>
+
+    <form method="POST" action="{{ url_for('treinamento.vincular_alunos', turma_id=turma.id) }}">
+        <div class="container">
+            
+            {% for aluno in alunos_disponiveis %}
+            <div class="aluno-row">
+                <div class="aluno-info">
+                    <span class="aluno-nome">{{ aluno.nome }}</span>
+                    <span class="aluno-email">{{ aluno.email }}</span>
+                </div>
+                
+                <input type="checkbox"
+                       class="checkbox"
+                       name="alunos"
+                       value="{{ aluno.id }}"
+                       {% if aluno.id in ids_alunos_na_turma %}checked{% endif %}>
+            </div>
+            {% endfor %}
+
+            {% if not alunos_disponiveis %}
+                <p>Nenhum aluno encontrado no sistema.</p>
+            {% endif %}
+
+            <div class="actions">
+                <button class="btn-primary" type="submit">Salvar Vínculos</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

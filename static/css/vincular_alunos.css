@@ -1,0 +1,95 @@
+body {
+    background: #f5f6fb;
+    font-family: system-ui, sans-serif;
+}
+
+.page-container {
+    padding: 30px;
+}
+
+h1 {
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+/* INFO BOX */
+.info-box {
+    background: #eef2ff;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #4338ca;
+    margin-bottom: 18px;
+}
+
+/* CARD CONTAINER */
+.container {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px 18px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+    max-width: 720px;
+}
+
+/* ALUNO LINHA */
+.aluno-row {
+    padding: 10px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.aluno-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.aluno-nome {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+}
+
+.aluno-email {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+/* BOTÕES */
+.actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #6d28ff, #9333ea);
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
